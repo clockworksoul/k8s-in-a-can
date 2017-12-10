@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER Matthew Titmus <matthew.titmus@gmail.com>
 
-ARG ANSIBLE_VERSION=2.4.1.0-1ppa~xenial
+ARG ANSIBLE_VERSION=2.4.2.0-1ppa~xenial
 ARG AWSCLI_VERSION=1.12.1
 ARG HELM_VERSION=2.7.2
 ARG KOPS_VERSION=1.7.1
