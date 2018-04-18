@@ -2,11 +2,12 @@ FROM ubuntu:16.04
 
 MAINTAINER Matthew Titmus <matthew.titmus@gmail.com>
 
-ARG ANSIBLE_VERSION=2.4.2.0-1ppa~xenial
+ARG ANSIBLE_VERSION=2.1.1.0-1~ubuntu16.04.1
 ARG AWSCLI_VERSION=1.12.1
-ARG HELM_VERSION=2.7.2
-ARG KOPS_VERSION=1.7.1
-ARG KUBECTL_VERSION=1.8.4
+ARG HELM_VERSION=2.8.2
+ARG ISTIO_VERSION=0.6.0
+ARG KOPS_VERSION=1.9.0
+ARG KUBECTL_VERSION=1.10.1
 ARG TERRAFORM_VERSION=0.11.0
 
 # Install generally useful things
@@ -16,7 +17,10 @@ RUN apt-get update                                          \
     curl                                                    \
     dnsutils                                                \
     git                                                     \
+    jq                                                      \
+    net-tools                                               \
     ssh                                                     \
+    telnet                                                  \
     unzip                                                   \
     vim                                                     \
     wget                                                    \
@@ -78,6 +82,15 @@ RUN wget -O helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v${H
 	&& chmod +x /usr/local/bin/helm \
 	&& rm -Rf linux-amd64 \
 	&& rm helm.tar.gz
+
+# Install Istioctl
+#
+RUN wget -O istio.tar.gz https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-linux.tar.gz \
+  && tar xfz istio.tar.gz \
+  && mv istio-${ISTIO_VERSION}/bin/istioctl /usr/local/bin/istioctl \
+  && chmod +x /usr/local/bin/istioctl \
+  && rm -Rf istio-${ISTIO_VERSION} \
+  && rm istio.tar.gz
 
 # Create default user "kops"
 #
