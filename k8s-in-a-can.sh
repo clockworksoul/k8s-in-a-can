@@ -23,7 +23,7 @@ ENV_AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
 ENV_AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
 # The address of the kops state store: an S3 bucket where the cluster
-# configuration lives (example: `s3://conductor-testing-kops-state`)
+# configuration lives (example: `s3://my-kops-state`)
 #
 ENV_KOPS_STATE_STORE=${KOPS_STATE_STORE}
 
